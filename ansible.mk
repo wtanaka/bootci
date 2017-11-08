@@ -1,3 +1,4 @@
+#!/bin/sh
 # Copyright (C) 2017 Wesley Tanaka
 #
 # This file is part of github.com/wtanaka/make
@@ -15,7 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/make.  If not, see
 # <http://www.gnu.org/licenses/>.
-*~
-/download.sh
-/python.sh
-/venv
+
+ansible: venv
+	(. venv/bin/activate; \
+		$(PIP) install --upgrade ansible ; \
+	)
+
+sinclude python.mk

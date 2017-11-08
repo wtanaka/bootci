@@ -18,5 +18,5 @@
 # <http://www.gnu.org/licenses/>.
 all:
 
-sinclude python.mk
+sinclude ansible.mk
 
