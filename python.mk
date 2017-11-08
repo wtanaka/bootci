@@ -29,8 +29,11 @@ virtualenv: pip
 	command -v virtualenv || $(PIP) install --user virtualenv
 
 pip: download.sh python.sh
+	# PYTHONHTTPSVERIFY=0 to work around Ubuntu 16.04.1
+	# [SSL: CERTIFICATE_VERIFY_FAILED] certificat verify failed
 	$(PIP)|| ( \
-		./download.sh https://bootstrap.pypa.io/get-pip.py > get-pip.py && \
+		env PYTHONHTTPSVERIFY=0 ./download.sh \
+			https://bootstrap.pypa.io/get-pip.py > get-pip.py && \
 		$(PYTHON) get-pip.py --user ; )
 
 python.sh: python.mk
@@ -38,6 +41,7 @@ python.sh: python.mk
 	echo 'for i in python python3 python2; do' >> "$@"
 	echo 'if command -v "$$i" 2>&1 > /dev/null; then exec "$$i" "$$@"; fi' >> "$@"
 	echo 'done' >> "$@"
+	echo 'echo "no python found"' >> "$@"
 	chmod +x "$@"
 
 sinclude shell.mk

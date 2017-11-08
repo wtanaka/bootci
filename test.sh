@@ -21,5 +21,8 @@ set -x
 
 cd `dirname $0`
 
-make pip
+make --debug=b pip
 ./python.sh -m pip
+
+make --debug=b ansible
+command -v venv/bin/ansible

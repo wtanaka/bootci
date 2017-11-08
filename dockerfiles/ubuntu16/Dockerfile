@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/bootci.  If not, see
 # <http://www.gnu.org/licenses/>.
-*~
-/download.sh
-/python.sh
-/venv
+FROM ubuntu:16.04
+RUN apt-get update
+RUN apt-get install -y make python-minimal
+CMD ["printenv"]
