@@ -1,22 +1,16 @@
-[![Build
-Status](https://travis-ci.org/wtanaka/make.svg?branch=master)](https://travis-ci.org/wtanaka/make)
-[![CircleCI](https://circleci.com/gh/wtanaka/make/tree/master.svg?style=svg)](https://circleci.com/gh/wtanaka/make/tree/master)
-[![Run
-Status](https://api.shippable.com/projects/59ffa1e4e07b7707001ccb6c/badge?branch=master)](https://app.shippable.com/github/wtanaka/make)
-[![Build
-Status](https://semaphoreci.com/api/v1/wtanaka/make/branches/master/shields_badge.svg)](https://semaphoreci.com/wtanaka/make)
-[ ![Codeship Status for
-wtanaka/make](https://app.codeship.com/projects/b5a665b0-a4ba-0135-16d4-669675cbf703/status?branch=master)](https://app.codeship.com/projects/255083)
-[![Build
-Status](https://www.bitrise.io/app/e58085949a184be7/status.svg?token=9nysF56O1mUmai4iZolwow&branch=master)](https://www.bitrise.io/app/e58085949a184be7)
+[![Build Status](https://travis-ci.org/wtanaka/bootci.svg?branch=master)](https://travis-ci.org/wtanaka/bootci)
+[![CircleCI](https://circleci.com/gh/wtanaka/bootci/tree/master.svg?style=svg)](https://circleci.com/gh/wtanaka/bootci/tree/master)
+[![Run Status](https://api.shippable.com/projects/59ffa1e4e07b7707001ccb6c/badge?branch=master)](https://app.shippable.com/github/wtanaka/bootci)
+[![Build Status](https://semaphoreci.com/api/v1/wtanaka/bootci/branches/master/badge.svg)](https://semaphoreci.com/wtanaka/bootci)
+[ ![Codeship Status for wtanaka/bootci](https://app.codeship.com/projects/2137bbd0-a684-0135-bf09-7a26ef0e36e4/status?branch=master)](https://app.codeship.com/projects/255514)
+[![Build Status](https://www.bitrise.io/app/9443ade2b60cd571/status.svg?token=GOEPArAcvaqTpJcGfsVG7g&branch=master)](https://www.bitrise.io/app/9443ade2b60cd571)
 
-# Make
+# bootCI
 
-This is a collection of Makefile rules that:
+Bootstrap your CI.
 
-* Bootstrap some software tools from a minimal baseline
-* Do not require root
-
+These are scripts to install software into your CI environment without root
+access.
 
 ## License
 
