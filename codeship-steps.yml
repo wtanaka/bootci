@@ -16,5 +16,5 @@
 # along with github.com/wtanaka/make.  If not, see
 # <http://www.gnu.org/licenses/>.
 - name: test
-  service: ubuntu14
+  service: ubuntu16
   command: /repo/test.sh

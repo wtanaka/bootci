@@ -16,3 +16,5 @@
 # along with github.com/wtanaka/make.  If not, see
 # <http://www.gnu.org/licenses/>.
 *~
+/download.sh
+/python.sh

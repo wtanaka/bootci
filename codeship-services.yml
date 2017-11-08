@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/make.  If not, see
 # <http://www.gnu.org/licenses/>.
-ubuntu14:
-  image: ubuntu:14.04
+ubuntu16:
+  image: wtanaka/ubuntu-1604-make:latest
   volumes:
   - ./:/repo
