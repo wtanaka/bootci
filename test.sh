@@ -23,3 +23,6 @@ cd `dirname $0`
 
 make pip
 ./python.sh -m pip
+
+make ansible
+command -v venv/bin/ansible
