@@ -21,6 +21,8 @@ download.sh: shell.mk
 	echo 'wget -O - "$$@" ||' >> "$@"
 	echo 'curl -L "$$@" ||' >> "$@"
 	echo 'perl -MLWP::Simple -e "getprint '"'"'$$@'"'"'" ||' >> "$@"
+	echo 'python -c "import sys; from urllib import urlopen as u' >> "$@"
+	echo 'sys.stdout.write(u('"'"'""$$@""'"'"').read())" ||' >> "$@"
 	echo 'python3 -c "import sys; from urllib.request import urlopen as u' >> "$@"
 	echo 'sys.stdout.buffer.write(u('"'"'""$$@""'"'"').read())"' >> "$@"
 	chmod +x "$@"
