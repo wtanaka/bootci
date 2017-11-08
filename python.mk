@@ -1,3 +1,4 @@
+#!/bin/sh
 # Copyright (C) 2017 Wesley Tanaka
 #
 # This file is part of github.com/wtanaka/make
@@ -15,14 +16,28 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/make.  If not, see
 # <http://www.gnu.org/licenses/>.
-version: 2
-jobs:
-  build:
-    docker:
-    - image: ubuntu:14.04
-    steps:
-    - checkout
-    - type: shell
-      name: Install make
-      command: apt-get update -qq && apt-get install -y make
-    - run: ./test.sh
+PYTHON=./python.sh
+PIP=$(PYTHON) -m pip
+
+venv: virtualenv
+	$(PYTHON) -m virtualenv "$@"
+	(. venv/bin/activate; \
+		$(PIP) install --upgrade pip ; \
+	)
+
+virtualenv: pip
+	command -v virtualenv || $(PIP) install --user virtualenv
+
+pip: download.sh python.sh
+	$(PIP)|| ( \
+		./download.sh https://bootstrap.pypa.io/get-pip.py > get-pip.py && \
+		$(PYTHON) get-pip.py --user ; )
+
+python.sh: python.mk
+	echo '#!/bin/sh' > "$@"
+	echo 'for i in python python3 python2; do' >> "$@"
+	echo 'if command -v "$$i" 2>&1 > /dev/null; then exec "$$i" "$$@"; fi' >> "$@"
+	echo 'done' >> "$@"
+	chmod +x "$@"
+
+sinclude shell.mk

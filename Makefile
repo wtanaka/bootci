@@ -1,3 +1,4 @@
+#!/bin/sh
 # Copyright (C) 2017 Wesley Tanaka
 #
 # This file is part of github.com/wtanaka/make
@@ -15,14 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/make.  If not, see
 # <http://www.gnu.org/licenses/>.
-version: 2
-jobs:
-  build:
-    docker:
-    - image: ubuntu:14.04
-    steps:
-    - checkout
-    - type: shell
-      name: Install make
-      command: apt-get update -qq && apt-get install -y make
-    - run: ./test.sh
+all:
+
+sinclude python.mk
+

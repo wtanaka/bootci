@@ -16,4 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/make.  If not, see
 # <http://www.gnu.org/licenses/>.
-echo "tests go here"
+set -e
+set -x
+
+cd `dirname $0`
+
+make pip
+./python.sh -m pip
