@@ -22,7 +22,7 @@ set -x
 cd `dirname $0`
 
 make --debug=b pip
-./python.sh -m pip
+.bootci/python.sh -m pip
 
 make --debug=b ansible
 command -v venv/bin/ansible
