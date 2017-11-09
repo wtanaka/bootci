@@ -22,4 +22,4 @@ ansible: venv
 		$(PIP) install --upgrade ansible ; \
 	)
 
-sinclude python.mk
+sinclude .bootci/python.mk
