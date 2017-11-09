@@ -28,11 +28,11 @@ venv: virtualenv
 virtualenv: pip
 	command -v virtualenv || $(PIP) install --user virtualenv
 
-pip: download.sh python.sh
+pip: .bootci/download.sh python.sh
 	# PYTHONHTTPSVERIFY=0 to work around Ubuntu 16.04.1
 	# [SSL: CERTIFICATE_VERIFY_FAILED] certificat verify failed
 	$(PIP)|| ( \
-		env PYTHONHTTPSVERIFY=0 ./download.sh \
+		env PYTHONHTTPSVERIFY=0 .bootci/download.sh \
 			https://bootstrap.pypa.io/get-pip.py > get-pip.py && \
 		$(PYTHON) get-pip.py --user ; )
 
