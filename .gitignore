@@ -17,5 +17,5 @@
 # <http://www.gnu.org/licenses/>.
 *~
 /.bootci/download.sh
-/python.sh
+/.bootci/python.sh
 /venv

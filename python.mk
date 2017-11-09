@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/bootci.  If not, see
 # <http://www.gnu.org/licenses/>.
-PYTHON=./python.sh
+PYTHON=.bootci/python.sh
 PIP=$(PYTHON) -m pip
 
 venv: virtualenv
@@ -28,7 +28,7 @@ venv: virtualenv
 virtualenv: pip
 	command -v virtualenv || $(PIP) install --user virtualenv
 
-pip: .bootci/download.sh python.sh
+pip: .bootci/download.sh .bootci/python.sh
 	# PYTHONHTTPSVERIFY=0 to work around Ubuntu 16.04.1
 	# [SSL: CERTIFICATE_VERIFY_FAILED] certificat verify failed
 	$(PIP)|| ( \
@@ -36,7 +36,7 @@ pip: .bootci/download.sh python.sh
 			https://bootstrap.pypa.io/get-pip.py > get-pip.py && \
 		$(PYTHON) get-pip.py --user ; )
 
-python.sh: python.mk
+.bootci/python.sh: .bootci python.mk
 	echo '#!/bin/sh' > "$@"
 	echo 'for i in python python3 python2; do' >> "$@"
 	echo 'if command -v "$$i" 2>&1 > /dev/null; then exec "$$i" "$$@"; fi' >> "$@"
