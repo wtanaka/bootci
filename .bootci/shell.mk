@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/bootci.  If not, see
 # <http://www.gnu.org/licenses/>.
-.bootci/download.sh: shell.mk .bootci
+.bootci/download.sh: .bootci/shell.mk .bootci
 	echo '#!/bin/sh' > "$@"
 	echo 'wget -O - "$$@" ||' >> "$@"
 	echo 'curl -L "$$@" ||' >> "$@"

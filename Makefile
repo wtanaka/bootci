@@ -18,5 +18,5 @@
 # <http://www.gnu.org/licenses/>.
 all:
 
-sinclude ansible.mk
+sinclude .bootci/ansible.mk
 

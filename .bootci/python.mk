@@ -36,7 +36,7 @@ pip: .bootci/download.sh .bootci/python.sh
 			https://bootstrap.pypa.io/get-pip.py > get-pip.py && \
 		$(PYTHON) get-pip.py --user ; )
 
-.bootci/python.sh: .bootci python.mk
+.bootci/python.sh: .bootci .bootci/python.mk
 	echo '#!/bin/sh' > "$@"
 	echo 'for i in python python3 python2; do' >> "$@"
 	echo 'if command -v "$$i" 2>&1 > /dev/null; then exec "$$i" "$$@"; fi' >> "$@"
@@ -44,4 +44,4 @@ pip: .bootci/download.sh .bootci/python.sh
 	echo 'echo "no python found"' >> "$@"
 	chmod +x "$@"
 
-sinclude shell.mk
+sinclude .bootci/shell.mk
