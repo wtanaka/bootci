@@ -16,6 +16,6 @@
 # along with github.com/wtanaka/bootci.  If not, see
 # <http://www.gnu.org/licenses/>.
 *~
-/download.sh
+/.bootci/download.sh
 /python.sh
 /venv

@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/bootci.  If not, see
 # <http://www.gnu.org/licenses/>.
-download.sh: shell.mk
+.bootci/download.sh: shell.mk .bootci
 	echo '#!/bin/sh' > "$@"
 	echo 'wget -O - "$$@" ||' >> "$@"
 	echo 'curl -L "$$@" ||' >> "$@"
@@ -26,3 +26,6 @@ download.sh: shell.mk
 	echo 'python3 -c "import sys; from urllib.request import urlopen as u' >> "$@"
 	echo 'sys.stdout.buffer.write(u('"'"'""$$@""'"'"').read())"' >> "$@"
 	chmod +x "$@"
+
+.bootci:
+	mkdir "$@"
