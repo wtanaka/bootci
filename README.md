@@ -12,6 +12,8 @@ Bootstrap your CI.
 These are scripts to install software into your CI environment without root
 access.
 
+[Read more here](https://wtanaka.com/node/8268).
+
 ## License
 
 This program is released under [GPLv3](https://www.gnu.org/licenses/gpl-3.0.txt)
