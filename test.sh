@@ -26,3 +26,6 @@ make --debug=b pip
 
 make --debug=b ansible
 command -v venv/bin/ansible
+
+make --debug=b .bootci/ansible1.4
+.bootci/ansible1.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.4'

@@ -18,4 +18,6 @@
 FROM ubuntu:16.04
 RUN apt-get update
 RUN apt-get install -y make python-minimal
+# For Ansible, which requires bcrypt
+RUN apt-get install -y build-essential libffi-dev python-dev
 CMD ["printenv"]
