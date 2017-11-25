@@ -34,7 +34,7 @@ ansible: venv
 	test -d $@ || { $(PYTHON) -m virtualenv $@; \
 	( \
 		. $@/bin/activate ; \
-		if grep "^$*$$" .bootci/broken-wheel-versions.txt > /dev/null; then \
+		if grep "^$*$$" .bootci/ansible-broken-wheels.txt > /dev/null; then \
 			ANSIBLE_LIBRARY=share/ansible; \
 			export ANSIBLE_LIBRARY; \
 			INSTALL_OPTS=--no-use-wheel; \
