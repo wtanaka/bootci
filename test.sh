@@ -27,11 +27,11 @@ make --debug=b pip
 make --debug=b ansible
 command -v venv/bin/ansible
 
-make --debug=b .bootci/ansible1.4
-.bootci/ansible1.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.4'
+make --debug=b .bootci/venv-ansible1.4
+.bootci/venv-ansible1.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.4'
 
-make --debug=b .bootci/ansible1.5.4
-.bootci/ansible1.5.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.5.4'
+make --debug=b .bootci/venv-ansible1.5.4
+.bootci/venv-ansible1.5.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.5.4'
 
-make --debug=b .bootci/ansible1.9.2
-.bootci/ansible1.9.2/bin/ansible-playbook --version | grep 'ansible-playbook 1.9.2'
+make --debug=b .bootci/venv-ansible1.9.2
+.bootci/venv-ansible1.9.2/bin/ansible-playbook --version | grep 'ansible-playbook 1.9.2'
