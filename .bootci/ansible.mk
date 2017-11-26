@@ -22,7 +22,7 @@ ansible: venv
 		$(PIP) install --upgrade ansible ; \
 	)
 
-.bootci/ansible%: virtualenv
+.bootci/venv-ansible%: virtualenv
 	# without ANSIBLE_LIBRARY, package tries to write to /usr/share
 	# without --no-use-wheel, module command scripts end up in
 	# ansible1.6.1/lib/python2.7/site-packages/
