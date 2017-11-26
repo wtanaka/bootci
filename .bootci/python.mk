@@ -31,7 +31,7 @@ virtualenv: pip
 pip: .bootci/download.sh .bootci/python.sh
 	# PYTHONHTTPSVERIFY=0 to work around Ubuntu 16.04.1
 	# [SSL: CERTIFICATE_VERIFY_FAILED] certificat verify failed
-	$(PIP)|| ( \
+	$(PIP) --version || ( \
 		env PYTHONHTTPSVERIFY=0 .bootci/download.sh \
 			https://bootstrap.pypa.io/get-pip.py > get-pip.py && \
 		$(PYTHON) get-pip.py --user ; )
