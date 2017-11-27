@@ -31,19 +31,22 @@ ansible: venv
 	#
 	# pip install 'requests[security]'
 	#    for https://stackoverflow.com/q/29099404/2034423
+	# pip install 'pynacl' because its source distribution does not
+	#    compile cleanly on CircleCI, so we want to install with wheel
 	test -d $@ || { $(PYTHON) -m virtualenv $@; \
 	( \
 		. $@/bin/activate ; \
+		$(PIP) --version; \
+		$(PIP) install --upgrade pip; \
+		$(PIP) --version; \
 		if grep "^$*$$" .bootci/ansible-broken-wheels.txt > /dev/null; then \
 			ANSIBLE_LIBRARY=share/ansible; \
 			export ANSIBLE_LIBRARY; \
 			INSTALL_OPTS=--no-use-wheel; \
+			$(PIP) install 'pynacl'; \
 		fi; \
-		pip --version; \
-		pip install --upgrade pip; \
-		pip --version; \
-		pip install 'requests[security]'; \
-		pip $(PIP_OPTS) install $$INSTALL_OPTS ansible==$*; \
+		$(PIP) install 'requests[security]'; \
+		$(PIP) $(PIP_OPTS) install $$INSTALL_OPTS ansible==$*; \
 		if [ ! -x $@/bin/ansible-playbook ]; then \
 			>&2 echo "Missing $@/bin/ansible-playbook"; \
 			rm -rf "$@"; \
