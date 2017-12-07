@@ -36,5 +36,8 @@ make --debug=b .bootci/venv-ansible1.5.4
 make --debug=b .bootci/venv-ansible1.9.2
 .bootci/venv-ansible1.9.2/bin/ansible-playbook --version | grep 'ansible-playbook 1.9.2'
 
+make --debug=b .bootci/venv-ansible2.0.0.2
+.bootci/venv-ansible2.0.0.2/bin/ansible-playbook --version | grep 'ansible-playbook 2.0.0.2'
+
 make --debug=b .bootci/venv-ansible2.1.0.0
 .bootci/venv-ansible2.1.0.0/bin/ansible-playbook --version | grep 'ansible-playbook 2.1.0.0'
