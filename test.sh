@@ -137,3 +137,7 @@ subdirtest/.bootci/make-ansible.sh 1.5.4
 .bootci/make-ansible.sh 2.3.1.0
 .bootci/venv-ansible2.3.1.0/bin/ansible-playbook --version | grep 'ansible-playbook 2.3.1.0'
 .bootci/ansible-playbook2.3.1.0.sh --version | grep 'ansible-playbook 2.3.1.0'
+
+# Ruby tests
+.bootci/make-rvm.sh
+command -v rvm || command -v .bootci/rvm/bin/rvm
