@@ -17,5 +17,11 @@
 # along with github.com/wtanaka/bootci.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-.bootci:
-	mkdir "$@"
+# Fall back onto PYTHONHTTPSVERIFY=0 for codeship.com
+wget -O - "$@" ||
+curl -L "$@" ||
+perl -MLWP::Simple -e "getprint '$@'" ||
+python -c "import sys; from urllib import urlopen as u
+sys.stdout.write(u('""$@""').read())" ||
+python3 -c "import sys; from urllib.request import urlopen as u
+sys.stdout.buffer.write(u('""$@""').read())"
