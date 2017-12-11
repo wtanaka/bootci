@@ -19,7 +19,7 @@
 
 ansible: venv
 	(. venv/bin/activate; \
-		$(PIP) install --upgrade ansible ; \
+		venv/bin/python -m pip install --isolated --upgrade ansible ; \
 	)
 
 .bootci/venv-ansible%: virtualenv
@@ -33,20 +33,20 @@ ansible: venv
 	#    for https://stackoverflow.com/q/29099404/2034423
 	# pip install 'pynacl' because its source distribution does not
 	#    compile cleanly on CircleCI, so we want to install with wheel
-	test -d $@ || { $(PYTHON) -m virtualenv $@; \
+	test -d $@ || { .bootci/withnopydist.sh $(PYTHON) -m virtualenv $@; \
 	( \
 		. $@/bin/activate ; \
-		$(PIP) --version; \
-		$(PIP) install --upgrade pip; \
-		$(PIP) --version; \
+		$@/bin/python -m pip --version; \
+		$@/bin/python -m pip install --isolated --upgrade pip; \
+		$@/bin/python -m pip --version; \
 		if grep "^$*$$" .bootci/ansible-broken-wheels.txt > /dev/null; then \
 			ANSIBLE_LIBRARY=share/ansible; \
 			export ANSIBLE_LIBRARY; \
 			INSTALL_OPTS=--no-use-wheel; \
-			$(PIP) install 'pynacl'; \
+			$@/bin/python -m pip install --isolated 'pynacl'; \
 		fi; \
-		$(PIP) install 'requests[security]'; \
-		$(PIP) $(PIP_OPTS) install $$INSTALL_OPTS ansible==$*; \
+		$@/bin/python -m pip --isolated install 'requests[security]'; \
+		$@/bin/python -m pip --isolated install $$INSTALL_OPTS ansible==$*; \
 		if [ ! -x $@/bin/ansible-playbook ]; then \
 			>&2 echo "Missing $@/bin/ansible-playbook"; \
 			rm -rf "$@"; \

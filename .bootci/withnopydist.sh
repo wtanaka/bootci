@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2017 Wesley Tanaka
+# Copyright (C) 2016 Wesley Tanaka
 #
 # This file is part of github.com/wtanaka/bootci
 #
@@ -16,9 +16,18 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/bootci.  If not, see
 # <http://www.gnu.org/licenses/>.
-set -e
-set -x
-
+#
+# Removes the local .pydistutils.cfg, then runs a command, then
+# restores it.  This is a race-condition prone hack which is needed
+# because:
+# easy_install of ansible within a virtualenv does not install the
+#   ansible module library in the correct spot (although easy_install
+#   will respect the existence of user=0 in setup.cfg
+# pip install of ansible within a virtualenv will install dependencies
+#   in .local if there is a .pydistutils.cfg, which causes
+#   ansible-playbook to fail.  Additionally, pip as of version 8 does
+#   not respect --no-user-cfg nor the presence of a setup.cfg which
+#   overrides the user install in .pydistutils.cfg
 PYDISTUTILSCFG="$HOME/.pydistutils.cfg"
 PYDISTUTILSCFGBACKUP="$HOME/.pydistutils.cfg.backedup"
 
@@ -40,43 +49,13 @@ install_trap()
    done
 }
 
-clear_config()
-{
-  if [ -f "$PYDISTUTILSCFG" ]; then
-    >&2 echo WARNING -- "$PYDISTUTILSCFG" already exists
-    >&2 echo Moving to "$PYDISTUTILSCFGBACKUP" temporarily
-    install_trap
-    mv "$PYDISTUTILSCFG" "$PYDISTUTILSCFGBACKUP"
-  fi
-}
+if [ -f "$PYDISTUTILSCFG" ]; then
+  >&2 echo WARNING -- "$PYDISTUTILSCFG" already exists
+  >&2 echo Moving to "$PYDISTUTILSCFGBACKUP" temporarily
+  install_trap
+  mv "$PYDISTUTILSCFG" "$PYDISTUTILSCFGBACKUP"
+fi
 
-cd `dirname $0`
+"$@"
 
-clear_config
-
->&2 echo "Testing virtualenv works with user=1 in pydistutils"
-cat > "$PYDISTUTILSCFG" <<EOF
-[install]
-user=1
-EOF
-
-make --debug=b pip
-.bootci/python.sh -m pip
-
-make --debug=b ansible
-command -v venv/bin/ansible
-
-make --debug=b .bootci/venv-ansible1.4
-.bootci/venv-ansible1.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.4'
-
-make --debug=b .bootci/venv-ansible1.5.4
-.bootci/venv-ansible1.5.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.5.4'
-
-make --debug=b .bootci/venv-ansible1.9.2
-.bootci/venv-ansible1.9.2/bin/ansible-playbook --version | grep 'ansible-playbook 1.9.2'
-
-make --debug=b .bootci/venv-ansible2.0.0.2
-.bootci/venv-ansible2.0.0.2/bin/ansible-playbook --version | grep 'ansible-playbook 2.0.0.2'
-
-make --debug=b .bootci/venv-ansible2.1.0.0
-.bootci/venv-ansible2.1.0.0/bin/ansible-playbook --version | grep 'ansible-playbook 2.1.0.0'
+restore_config
