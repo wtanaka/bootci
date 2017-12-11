@@ -20,9 +20,9 @@ PYTHON=.bootci/python.sh
 PIP=$(PYTHON) -m pip
 
 venv: virtualenv
-	$(PYTHON) -m virtualenv "$@"
+	.bootci/withnopydist.sh $(PYTHON) -m virtualenv "$@"
 	(. venv/bin/activate; \
-		$(PIP) install --upgrade pip ; \
+		venv/bin/python -m pip install --isolated --upgrade pip ; \
 	)
 
 virtualenv: pip
