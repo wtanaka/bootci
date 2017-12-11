@@ -67,3 +67,12 @@ if [ ! -x "$TARGET"/bin/ansible ]; then
     );
   fi
 fi
+
+# Create helper script to work around '#!' issues with long directory
+# paths
+HELPER="${DIRNAME}/ansible-playbook${VERSION}.sh"
+if [ ! -x "${HELPER}" ]; then
+  echo '#!/bin/sh' > "$HELPER"
+  echo "\"${TARGET}\"/bin/python \"${TARGET}\"/bin/ansible-playbook \"\$@\"" >> "$HELPER"
+  chmod +x "$HELPER"
+fi
