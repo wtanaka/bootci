@@ -68,15 +68,20 @@ command -v venv/bin/ansible
 
 .bootci/make-ansible.sh 1.4
 .bootci/venv-ansible1.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.4'
+.bootci/ansible-playbook1.4.sh --version | grep 'ansible-playbook 1.4'
 
 .bootci/make-ansible.sh 1.5.4
 .bootci/venv-ansible1.5.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.5.4'
+.bootci/ansible-playbook1.5.4.sh --version | grep 'ansible-playbook 1.5.4'
 
 .bootci/make-ansible.sh 1.9.2
 .bootci/venv-ansible1.9.2/bin/ansible-playbook --version | grep 'ansible-playbook 1.9.2'
+.bootci/ansible-playbook1.9.2.sh --version | grep 'ansible-playbook 1.9.2'
 
 .bootci/make-ansible.sh 2.0.0.2
 .bootci/venv-ansible2.0.0.2/bin/ansible-playbook --version | grep 'ansible-playbook 2.0.0.2'
+.bootci/ansible-playbook2.0.0.2.sh --version | grep 'ansible-playbook 2.0.0.2'
 
 .bootci/make-ansible.sh 2.1.0.0
 .bootci/venv-ansible2.1.0.0/bin/ansible-playbook --version | grep 'ansible-playbook 2.1.0.0'
+.bootci/ansible-playbook2.1.0.0.sh --version | grep 'ansible-playbook 2.1.0.0'
