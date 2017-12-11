@@ -18,5 +18,10 @@
 # <http://www.gnu.org/licenses/>.
 all:
 
+clean:
+	-rm -f .bootci/ansible-playbook*.sh
+	-rm -rf .bootci/venv-ansible*
+	-find . -name "*~" -exec rm \{\} \;
+
 sinclude .bootci/ansible.mk
 
