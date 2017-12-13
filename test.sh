@@ -60,6 +60,11 @@ cat > "$PYDISTUTILSCFG" <<EOF
 user=1
 EOF
 
+# Install pre-commit
+.bootci/make-precommit.sh
+command -v .bootci/venv/bin/pre-commit
+.bootci/venv/bin/pre-commit --version 2>&1 | grep '^pre-commit '
+
 make --debug=b pip
 .bootci/python.sh -m pip
 
