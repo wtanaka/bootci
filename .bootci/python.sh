@@ -15,7 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/bootci.  If not, see
-# <http://www.gnu.org/licenses/>. 
+# <http://www.gnu.org/licenses/>.
 for i in python python3 python2; do
 if command -v "$i" 2>&1 > /dev/null; then exec "$i" "$@"; fi
 done

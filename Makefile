@@ -20,8 +20,9 @@ all:
 
 clean:
 	-rm -f .bootci/ansible-playbook*.sh
+	-rm -f .git/hooks/pre-commit
+	-rm -rf .bootci/venv
 	-rm -rf .bootci/venv-ansible*
 	-find . -name "*~" -exec rm \{\} \;
 
 sinclude .bootci/ansible.mk
-
