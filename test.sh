@@ -62,14 +62,30 @@ EOF
 
 # Install pre-commit
 .bootci/make-precommit.sh
-command -v .bootci/venv/bin/pre-commit
-.bootci/venv/bin/pre-commit --version 2>&1 | grep '^pre-commit '
+command -v "$HOME"/.pre-commit-venv/bin/pre-commit
+"$HOME"/.pre-commit-venv/bin/pre-commit --version 2>&1 | grep '^pre-commit '
+
+if command -v git 2>&1 > /dev/null; then
+  # Run pre-commit
+  (
+    TMPFILE=`mktemp -d -t gitrepoXXXXXXX`
+    cd "$TMPFILE"
+    git init
+    echo 'repos:' > .pre-commit-config.yaml
+    echo '- repo: git://github.com/pre-commit/pre-commit-hooks' >> .pre-commit-config.yaml
+    echo '  sha: v1.1.1' >> .pre-commit-config.yaml
+    echo '  hooks:' >> .pre-commit-config.yaml
+    echo '  - id: trailing-whitespace' >> .pre-commit-config.yaml
+    "$HOME"/.pre-commit-venv/bin/pre-commit run --all-files
+    rm -r "$TMPFILE"
+  )
+fi
 
 make --debug=b pip
 .bootci/python.sh -m pip
 
 make --debug=b ansible
-command -v venv/bin/ansible
+command -v .bootci/venv/bin/ansible
 
 .bootci/make-ansible.sh 1.4
 .bootci/venv-ansible1.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.4'

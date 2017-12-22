@@ -18,8 +18,8 @@
 # <http://www.gnu.org/licenses/>.
 
 ansible: venv
-	(. venv/bin/activate; \
-		venv/bin/python -m pip install --isolated --upgrade ansible ; \
+	(. .bootci/venv/bin/activate; \
+		.bootci/venv/bin/python -m pip install --isolated --upgrade ansible ; \
 	)
 
 sinclude .bootci/python.mk

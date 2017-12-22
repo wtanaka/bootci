@@ -21,10 +21,15 @@ set -e
 
 DIRNAME="`dirname $0`"
 
-"$DIRNAME"/make-venv.sh
+"$DIRNAME"/download.sh \
+  https://raw.githubusercontent.com/pre-commit/pre-commit.github.io/real_master/install-local.py \
+ | "$DIRNAME"/withnopydist.sh "$DIRNAME"/python.sh
 
 (
-  . "$DIRNAME"/venv/bin/activate
-  "$DIRNAME"/venv/bin/python -m pip install --isolated --upgrade pre-commit
+  . "$HOME"/.pre-commit-venv/bin/activate
+  # this script pip installs pre-commit-hooks, and we don't have
+  # control over passing it the --isolated flag, so we run it with
+  # "withnopydist.sh"
+  env PATH="$HOME"/.pre-commit-venv/bin:"$PATH" \
+    "$DIRNAME"/withnopydist.sh "$HOME"/bin/pre-commit
 )
-
