@@ -17,4 +17,4 @@
 # <http://www.gnu.org/licenses/>.
 - name: test
   service: ubuntu16
-  command: /repo/test.sh
+  command: env PYTHONHTTPSVERIFY=0 /repo/test.sh
