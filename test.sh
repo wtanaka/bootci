@@ -81,11 +81,8 @@ if command -v git 2>&1 > /dev/null; then
   )
 fi
 
-make --debug=b pip
+.bootci/make-pip.sh
 .bootci/python.sh -m pip
-
-make --debug=b ansible
-command -v .bootci/venv/bin/ansible
 
 .bootci/make-ansible.sh 1.4
 .bootci/venv-ansible1.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.4'
