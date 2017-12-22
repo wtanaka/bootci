@@ -16,6 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with github.com/wtanaka/bootci.  If not, see
 # <http://www.gnu.org/licenses/>.
-all:
 
-sinclude .bootci/ansible.mk
+set -e
+
+DIRNAME="`dirname $0`"
+
+rm -f "$DIRNAME"/ansible-playbook*.sh
+rm -rf "$DIRNAME"/venv
+rm -rf "$DIRNAME"/venv-ansible*
+find "$DIRNAME"/.. -name "*~" -exec rm \{\} \;
