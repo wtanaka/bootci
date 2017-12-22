@@ -31,7 +31,7 @@ pip_local()
 
 PIP=pip_local
 
-make -f "$DIRNAME"/python.mk virtualenv
+"$DIRNAME"/make-virtualenv.sh
 
 if [ ! -x "$TARGET"/bin/ansible ]; then
   # without ANSIBLE_LIBRARY, package tries to write to /usr/share

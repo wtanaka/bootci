@@ -16,7 +16,7 @@
 # along with github.com/wtanaka/bootci.  If not, see
 # <http://www.gnu.org/licenses/>.
 ubuntu16:
-  # image: wtanaka/ubuntu-1604-make:latest
+  # image: wtanaka/ubuntu-1604:latest
   build: dockerfiles/ubuntu16
   volumes:
   - ./:/repo

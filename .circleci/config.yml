@@ -26,9 +26,6 @@ jobs:
       name: apt-get update
       command: apt-get update -qq
     - type: shell
-      name: Install make
-      command: apt-get install -y make
-    - type: shell
       name: Install ansible dependencies
       command: apt-get install -y build-essential libffi-dev python-dev
     - run: ./test.sh
