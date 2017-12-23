@@ -60,6 +60,10 @@ cat > "$PYDISTUTILSCFG" <<EOF
 user=1
 EOF
 
+mkdir subdirtest/
+cp -a .bootci subdirtest/.bootci
+[ -d subdirtest/.bootci/ ]
+
 # Install pre-commit
 .bootci/make-precommit.sh
 command -v "$HOME"/.pre-commit-venv/bin/pre-commit
@@ -91,6 +95,12 @@ fi
 .bootci/make-ansible.sh 1.5.4
 .bootci/venv-ansible1.5.4/bin/ansible-playbook --version | grep 'ansible-playbook 1.5.4'
 .bootci/ansible-playbook1.5.4.sh --version | grep 'ansible-playbook 1.5.4'
+
+subdirtest/.bootci/make-ansible.sh 1.5.4
+(
+  cd subdirtest
+  .bootci/ansible-playbook1.5.4.sh --version | grep 'ansible-playbook 1.5.4'
+)
 
 .bootci/make-ansible.sh 1.9.2
 .bootci/venv-ansible1.9.2/bin/ansible-playbook --version | grep 'ansible-playbook 1.9.2'

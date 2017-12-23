@@ -22,6 +22,7 @@ set -e
 DIRNAME="`dirname $0`"
 VERSION="$1"
 TARGET="$DIRNAME/venv-ansible$VERSION"
+ABSTARGET="`${DIRNAME}/realpath.sh ${TARGET}`"
 PYTHON="${DIRNAME}"/python.sh
 
 pip_local()
@@ -73,6 +74,6 @@ fi
 HELPER="${DIRNAME}/ansible-playbook${VERSION}.sh"
 if [ ! -x "${HELPER}" ]; then
   echo '#!/bin/sh' > "$HELPER"
-  echo "\"${TARGET}\"/bin/python \"${TARGET}\"/bin/ansible-playbook \"\$@\"" >> "$HELPER"
+  echo "\"${ABSTARGET}\"/bin/python \"${ABSTARGET}\"/bin/ansible-playbook \"\$@\"" >> "$HELPER"
   chmod +x "$HELPER"
 fi
