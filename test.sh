@@ -141,3 +141,9 @@ subdirtest/.bootci/make-ansible.sh 1.5.4
 # Ruby tests
 .bootci/make-rvm.sh
 command -v rvm || command -v .bootci/rvm/bin/rvm
+
+# gradle
+.bootci/make-gradle.sh
+# applied https://stackoverflow.com/a/51904549/2034423
+# for https://app.shippable.com/
+! command -v java || env JAVA_TOOL_OPTIONS="-Dhttps.protocols=TLSv1.2" ./gradlew --version | grep 'Gradle '
