@@ -31,3 +31,5 @@ if ! "$DIRNAME"/python.sh -m pip --version; then
     ./python.sh get-pip.py --user
   )
 fi
+
+"$DIRNAME"/python.sh -m pip install --user --upgrade pip
