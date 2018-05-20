@@ -21,9 +21,20 @@ set -e
 
 DIRNAME="`dirname $0`"
 
+"$DIRNAME"/make-pip.sh
+
+# Mac OSX has pyOpenSSL installed already
+"$DIRNAME"/python.sh -m pip install \
+  --ignore-installed pyOpenSSL \
+  --upgrade 'requests[security]'
+
+# We use the default installer instead of installing in a virtualenv
+# because a venv will cause the pre-commit shell script to have a "#!"
+# command line that is too long.
+# Use PYTHONHTTPSVERIFY for Mac OSX
 "$DIRNAME"/download.sh \
   https://raw.githubusercontent.com/pre-commit/pre-commit.github.io/real_master/install-local.py \
- | "$DIRNAME"/withnopydist.sh "$DIRNAME"/python.sh
+ | env PYTHONHTTPSVERIFY=0 "$DIRNAME"/withnopydist.sh "$DIRNAME"/python.sh
 
 (
   . "$HOME"/.pre-commit-venv/bin/activate
