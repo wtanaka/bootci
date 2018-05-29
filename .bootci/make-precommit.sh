@@ -20,16 +20,23 @@
 set -e
 
 DIRNAME="`dirname $0`"
+PYTHON="${DIRNAME}"/python.sh
+# Try to put TARGET in a shorter absolute path so that #! line to the
+# python binary does not become too long.  Long lines can lead to "No
+# such file or directory" errors.
+TARGET="${HOME}"/.pcv
 
-"$DIRNAME"/download.sh \
-  https://raw.githubusercontent.com/pre-commit/pre-commit.github.io/real_master/install-local.py \
- | "$DIRNAME"/withnopydist.sh "$DIRNAME"/python.sh
+. "${DIRNAME}"/common.sh
+
+"$DIRNAME"/make-virtualenv.sh
+
+"${DIRNAME}/withnopydist.sh" "$PYTHON" -m virtualenv "$TARGET"
 
 (
-  . "$HOME"/.pre-commit-venv/bin/activate
-  # this script pip installs pre-commit-hooks, and we don't have
-  # control over passing it the --isolated flag, so we run it with
-  # "withnopydist.sh"
-  env PATH="$HOME"/.pre-commit-venv/bin:"$PATH" \
-    "$DIRNAME"/withnopydist.sh "$HOME"/bin/pre-commit
+  . "$TARGET"/bin/activate
+  "$TARGET/bin/python" -m pip --version
+  retry "$TARGET/bin/python" -m pip install --isolated --upgrade pip
+  "$TARGET/bin/python" -m pip --version
+  "$TARGET/bin/python" -m pip install --isolated 'requests[security]'
+  "$TARGET/bin/python" -m pip install --isolated pre-commit
 )
