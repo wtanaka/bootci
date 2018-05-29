@@ -66,8 +66,9 @@ cp -a .bootci subdirtest/.bootci
 
 # Install pre-commit
 .bootci/make-precommit.sh
-command -v "$HOME"/.pre-commit-venv/bin/pre-commit
-"$HOME"/.pre-commit-venv/bin/pre-commit --version 2>&1 | grep '^pre-commit '
+PRECOMMIT_VENV="${HOME}"/.pcv
+command -v "$PRECOMMIT_VENV"/bin/pre-commit
+"$PRECOMMIT_VENV"/bin/pre-commit --version 2>&1 | grep '^pre-commit '
 
 if command -v git 2>&1 > /dev/null; then
   # Run pre-commit
@@ -80,7 +81,8 @@ if command -v git 2>&1 > /dev/null; then
     echo '  sha: v1.1.1' >> .pre-commit-config.yaml
     echo '  hooks:' >> .pre-commit-config.yaml
     echo '  - id: trailing-whitespace' >> .pre-commit-config.yaml
-    "$HOME"/.pre-commit-venv/bin/pre-commit run --all-files
+    . "$PRECOMMIT_VENV"/bin/activate
+    "$PRECOMMIT_VENV"/bin/pre-commit run --all-files
     rm -r "$TMPFILE"
   )
 fi
