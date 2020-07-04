@@ -18,9 +18,9 @@
 language: none
 sudo: required
 
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y ansible
+#before_install:
+#  - sudo apt-get update -qq
+#  - sudo apt-get install -y ansible
 
 script:
   - ./test.sh
