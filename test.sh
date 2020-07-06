@@ -87,6 +87,10 @@ if command -v git 2>&1 > /dev/null; then
   )
 fi
 
+# gpg
+.bootci/make-gpg.sh
+
+# pip
 .bootci/make-pip.sh
 .bootci/python.sh -m pip
 
