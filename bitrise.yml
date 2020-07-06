@@ -42,4 +42,8 @@ workflows:
 
             ./test.sh
         - runner_bin: "/bin/sh"
+    - github-status@2.2.2:
+        inputs:
+        - status_identifier: Running test.sh
+        - auth_token: "$GITHUB_STATUS_KEY"
     - deploy-to-bitrise-io@1.3.6: {}
