@@ -29,8 +29,8 @@ workflows:
     steps:
     - activate-ssh-key@4.0.5:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@3.5.1: {}
-    - script@1.1.5:
+    - git-clone@4.0.18: {}
+    - script@1.1.6:
         title: Do anything with Script step
         inputs:
         - content: |-
@@ -46,4 +46,4 @@ workflows:
         inputs:
         - status_identifier: Running test.sh
         - auth_token: "$GITHUB_STATUS_KEY"
-    - deploy-to-bitrise-io@1.3.6: {}
+    - deploy-to-bitrise-io@1.10.0: {}
