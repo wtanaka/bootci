@@ -87,6 +87,9 @@ if command -v git 2>&1 > /dev/null; then
   )
 fi
 
+# curl
+.bootci/make-curl.sh
+
 # gpg
 .bootci/make-gpg.sh
 
